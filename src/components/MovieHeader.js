@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 
 const MovieHeader = () => {
   return (
-    <div className="flex justify-between items-center shadow rounded-md bg-white p-2 pl-3 my-3">
-      <h2 className="text-zinc-600">IMDB Movie Database</h2>
+    <div className="flex justify-between items-center shadow rounded-md bg-white dark:bg-slate-700 p-2 pl-3 my-3">
+      <h2 className="text-zinc-600 dark:text-zinc-200">IMDB Movie Database</h2>
       <div className="flex items-center gap-2">
         <Link to="/movies" className="myButton bg-blue-600 hover:bg-blue-500">
           Tüm filmler

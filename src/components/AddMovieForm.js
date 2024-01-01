@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import useAxios from "../hooks/useAxios";
 
 const EditMovieForm = (props) => {
-  const { id } = useParams();
-
   const {
     data: movie,
-    sendRequest: movieRequest,
     setData: setMovie,
+    sendRequest: movieRequest,
     METHODS,
   } = useAxios({
     initialData: {
@@ -22,6 +19,8 @@ const EditMovieForm = (props) => {
     },
   });
 
+  const { updateMovies } = props;
+
   const handleChange = (e) => {
     setMovie({
       ...movie,
@@ -29,18 +28,13 @@ const EditMovieForm = (props) => {
     });
   };
 
-  useEffect(() => {
-    movieRequest({ url: `/movies/${id}`, method: METHODS.GET });
-  }, [id]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
     movieRequest({
-      url: `/movies/${id}`,
-      method: METHODS.PUT,
-      redirect: `/movies/${id}`,
-      callbackSuccess: props.updateMovies,
+      url: `/movies`,
+      method: METHODS.POST,
+      redirect: `/movies`,
+      callbackSuccess: updateMovies,
       data: movie,
     });
   };
@@ -48,11 +42,11 @@ const EditMovieForm = (props) => {
   const { title, director, genre, metascore, description } = movie;
 
   return (
-    <div className="bg-white dark:bg-slate-700 rounded-md shadow flex-1 dark:bg-slate-700">
+    <div className="bg-white dark:bg-slate-700 rounded-md shadow flex-1">
       <form onSubmit={handleSubmit}>
         <div className="p-5 pb-3 border-b border-zinc-200 dark:border-zinc-900">
           <h4 className="text-xl font-bold">
-            Düzenleniyor <strong>{movie.title}</strong>
+            Yeni Ekleniyor <strong>{movie.title}</strong>
           </h4>
         </div>
 
@@ -104,14 +98,14 @@ const EditMovieForm = (props) => {
         </div>
 
         <div className="px-5 py-4 border-t border-zinc-200 dark:border-zinc-900 flex justify-end gap-2">
-          <Link to={`/movies/${id}`} className="myButton bg-zinc-500">
+          <Link to={`/movies`} className="myButton bg-zinc-500">
             Vazgeç
           </Link>
           <button
             type="submit"
             className="myButton bg-green-700 hover:bg-green-600"
           >
-            Düzenle
+            Ekle
           </button>
         </div>
       </form>

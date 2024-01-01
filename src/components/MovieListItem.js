@@ -11,7 +11,10 @@ const MovieListItem = (props) => {
       <td>{genre}</td>
       <td className="text-center">{metascore}</td>
       <td className="p-2">
-        <Link to={`/movies/${id}`} className="myButton bg-blue-600 hover:bg-blue-500">
+        <Link
+          to={`/movies/${id}`}
+          className="myButton bg-blue-600 hover:bg-blue-500"
+        >
           Detay
         </Link>
       </td>
